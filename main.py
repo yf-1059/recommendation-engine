@@ -115,11 +115,11 @@ def recommendation():
     #connect to mysql
     id = request.json['input']
     try:
-        connection = mysql.connector.connect(host='containers-us-west-167.railway.app',
+        connection = mysql.connector.connect(host='containers-us-west-107.railway.app',
                                             database='railway',
                                             user='root',
-                                            password='L38qgHfxCEyX3crJLvxz',
-                                            port='5764')
+                                            password='SfARj9d5tWUehAvvn7IX',
+                                            port='6610')
 
         cursor = connection.cursor()
         #get all project detail
