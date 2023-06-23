@@ -116,7 +116,7 @@ def recommendation():
     id = request.json['input']
     try:
         connection = mysql.connector.connect(host='localhost',
-                                            database='ppms-v6',
+                                            database='ppms',
                                             user='root',
                                             password='')
 
@@ -136,7 +136,6 @@ def recommendation():
         project['all'] = project['description'] + " " + project['name'] + " " + project['categories']
 
         sql_data2 = sql_data2.query('project_id!='+id)
-        print(sql_data2)
         combined = pd.DataFrame(columns=['all'])
         combined['all'] = sql_data2['description'] + " " + sql_data2['name'] + " " + sql_data2['categories']
 
@@ -162,7 +161,6 @@ def recommendation():
         final_recommendation=merge_scaling(knn_result,TF,CV)
         final_recommendation = final_recommendation.query('id!='+id)
         json_final_recommendation= final_recommendation['id']
-        print(json_final_recommendation)
         return json.dumps(json.loads(json_final_recommendation.to_json(orient="split", index=False)))
         
     except mysql.connector.Error as error:
@@ -173,7 +171,6 @@ def recommendation():
            cursor.close()
            connection.close()
            print("MySQL connection is closed")
-
 
 @app.route('/')
 def index():
